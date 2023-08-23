@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/modules/splash/bindings/splash_binding.dart';
+import 'package:shop_app/modules/user/bindings/user_binding.dart';
 import 'package:shop_app/routes/app_route.dart';
 import 'package:shop_app/core/constants/string_constant.dart';
 import 'package:shop_app/core/styles/app_styles.dart';
@@ -32,7 +33,10 @@ class MyApp extends StatelessWidget {
       ),
       getPages: AppRoute.routes,
       initialRoute: AppRoute.splash,
-      initialBinding: SplashBinding(),
+      initialBinding: BindingsBuilder(() {
+        SplashBinding().dependencies();
+        UserBinding().dependencies();
+      }),
     );
   }
 }

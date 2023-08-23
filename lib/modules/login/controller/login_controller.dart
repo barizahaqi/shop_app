@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/data/repositories/login_repository.dart';
+import 'package:shop_app/modules/user/controllers/user_controller.dart';
 import 'package:shop_app/routes/app_route.dart';
 
 class LoginController extends GetxController {
@@ -19,10 +20,10 @@ class LoginController extends GetxController {
           await loginRepository.login(username.text, password.text);
       response.fold((failed) => Get.snackbar("Failed to login", failed.message),
           (success) {
-        GetStorage box = GetStorage();
-        box.write('isLoggedIn', true);
-        box.write("token", success.token);
-        Get.offAllNamed(AppRoute.main);
+        GetStorage().write('isLoggedIn', true);
+        GetStorage().write("token", success.token);
+        Get.find<UserController>().saveId(username.text, password.text);
+        Get.toNamed(AppRoute.main);
       });
     }
   }

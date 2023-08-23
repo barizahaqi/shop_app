@@ -8,6 +8,7 @@ class CustomOutlinedTextField extends StatelessWidget {
   final String hintText;
   final Icon? prefixIcon;
   final bool isDecimal;
+  final bool onlyNumber;
   final String? Function(String? value)? validator;
   final bool readOnly;
   final bool enabled;
@@ -24,6 +25,7 @@ class CustomOutlinedTextField extends StatelessWidget {
     this.readOnly = false,
     this.enabled = true,
     this.isDecimal = false,
+    this.onlyNumber = false,
     this.onTap,
     this.onChanged,
     this.keyboardType = TextInputType.name,
@@ -55,10 +57,12 @@ class CustomOutlinedTextField extends StatelessWidget {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           keyboardType: keyboardType,
           inputFormatters: [
-            if (keyboardType == TextInputType.number && !isDecimal)
-              FilteringTextInputFormatter.allow(RegExp('[0-9-]')),
-            if (isDecimal)
+            if (keyboardType == TextInputType.number && onlyNumber)
+              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+            if (keyboardType == TextInputType.number && isDecimal)
               FilteringTextInputFormatter.allow(RegExp(r'^-?\d*\.?\d*')),
+            if (keyboardType == TextInputType.number)
+              FilteringTextInputFormatter.allow(RegExp('[0-9-]')),
           ],
           decoration: InputDecoration(
             prefixIcon: prefixIcon,

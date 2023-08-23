@@ -39,7 +39,7 @@ class _CartEditViewState extends State<CartEditView> {
               CustomPrimaryButton(
                 onPressed: () {
                   Get.find<CartChangeController>()
-                      .updateCart(widget.cart.id.toString(), "1");
+                      .updateCart(widget.cart.id.toString());
                 },
                 text: "Edit Cart",
               ),

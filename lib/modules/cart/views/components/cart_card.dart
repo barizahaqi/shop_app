@@ -25,7 +25,7 @@ class CartCard extends GetView<CartController> {
         },
         child: ListTile(
             leading: const Icon(Icons.shopping_cart),
-            title: Text("Cart Id: ${cart.id}",
+            title: Text("Id ${cart.id}",
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color: Colors.white,
                     )),

@@ -22,7 +22,7 @@ class CartChangeRequest {
       );
 
   Map<String, dynamic> toJson() => {
-        'userId': userId,
+        'userId': int.parse(userId),
         'date': date.toIso8601String(),
         'products': products,
       };

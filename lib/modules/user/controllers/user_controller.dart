@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'package:shop_app/core/constants/string_constant.dart';
 import 'package:shop_app/data/models/user/response/user_response.dart';
+import 'package:shop_app/data/models/user/user_component.dart';
 import 'package:shop_app/data/repositories/user_repository.dart';
 
 class UserController extends GetxController
@@ -14,11 +16,23 @@ class UserController extends GetxController
   RxString sortLabel = "Ascending".obs;
   RxString sortValue = StringConstant.emptyString.obs;
 
+  List<UserResponse> users = <UserResponse>[].obs;
+
   @override
   void onInit() {
     super.onInit();
     limit.text = StringConstant.emptyString;
+    initGetUsers();
     getUsers();
+  }
+
+  Future<void> initGetUsers() async {
+    final response = await userRepository.getUsers(limit.text, sortValue.value);
+    response.fold(
+        (failure) => Get.snackbar("Failed to get Users", failure.message),
+        (success) => {
+              users = success,
+            });
   }
 
   Future<void> getUsers() async {
@@ -48,5 +62,20 @@ class UserController extends GetxController
     sortLabel.value = "Ascending";
     sortValue.value = StringConstant.emptyString;
     getUsers();
+  }
+
+  String getNameById(String id) {
+    UserName name =
+        users.firstWhere((element) => element.id.toString() == id).name;
+    return "${name.firstname} ${name.lastname}";
+  }
+
+  void saveId(String username, String password) {
+    String id = users
+        .firstWhere((element) =>
+            element.username == username && element.password == password)
+        .id
+        .toString();
+    GetStorage().write("id", id);
   }
 }

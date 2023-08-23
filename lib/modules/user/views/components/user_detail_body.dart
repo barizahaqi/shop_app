@@ -46,6 +46,9 @@ class UserDetailBody extends GetView<UserDetailController> {
         Text("Password: ${user.password}",
             style: Theme.of(context).textTheme.bodyLarge),
         const SizedBox(height: 10),
+        Text("List of bought products:",
+            style: Theme.of(context).textTheme.bodyLarge),
+        const SizedBox(height: 8),
         const UserCart(),
         const SizedBox(height: 20),
         CustomPrimaryButton(

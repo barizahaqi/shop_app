@@ -12,7 +12,7 @@ class StringConstant {
   static const String categoriesUrl = "/products/categories";
   static const String usersUrl = "/users";
   static const String cartUrl = "/carts";
-  static const String userCartUrl = "/carts";
+  static const String userCartUrl = "/carts/user";
   static const String loginUrl = "/auth/login";
 
   // product

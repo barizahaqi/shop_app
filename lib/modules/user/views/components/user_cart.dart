@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_app/core/constants/string_constant.dart';
 import 'package:shop_app/modules/cart/controllers/cart_user_controller.dart';
+import 'package:shop_app/modules/product/controllers/product_controller.dart';
 
 class UserCart extends GetView<CartUserController> {
   const UserCart({super.key});
@@ -19,15 +19,29 @@ class UserCart extends GetView<CartUserController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("List Cart Item:",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              for (var item in state!.products)
-                Text(
-                    "Product Id : ${item.productId} x Jumlah: ${item.quantity}"),
+              for (var item in state![0].products)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.circle, size: 10),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        "${Get.find<ProductController>().getNameById(item.productId.toString())}: ",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text(
+                      "${item.quantity} Item",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ],
+                )
             ],
           )),
-      onLoading: const Center(child: CircularProgressIndicator()),
-      onEmpty: const Center(child: Text(StringConstant.emptyUser)),
+      onLoading: const Center(child: LinearProgressIndicator()),
+      onEmpty: const Center(child: Text("No cart for this user")),
       onError: (error) => Center(child: Text(error!)),
     );
   }

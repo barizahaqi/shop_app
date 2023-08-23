@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/core/constants/string_constant.dart';
+import 'package:shop_app/modules/cart/controllers/cart_user_controller.dart';
 import 'package:shop_app/modules/user/controllers/user_detail_controller.dart';
 import 'package:shop_app/modules/user/views/components/user_detail_body.dart';
 
@@ -18,6 +19,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
   void initState() {
     super.initState();
     Get.find<UserDetailController>().getDetailUser(widget.id.toString());
+    Get.find<CartUserController>().getUserCart(widget.id.toString());
   }
 
   @override

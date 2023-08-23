@@ -26,7 +26,7 @@ class CartRepository extends GetxService {
     return cartDataSource.getCartById(request);
   }
 
-  Future<Either<ErrorResponse, CartResponse>> getCartByUserId(
+  Future<Either<ErrorResponse, List<CartResponse>>> getCartByUserId(
       String userId) async {
     IdModel request = IdModel(id: userId);
     return cartDataSource.getCartByUserId(request);

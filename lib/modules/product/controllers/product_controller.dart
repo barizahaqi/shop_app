@@ -74,4 +74,10 @@ class ProductController extends GetxController
     sortValue.value = StringConstant.emptyString;
     getProducts();
   }
+
+  String getNameById(String id) {
+    final product =
+        products.firstWhere((element) => element.id.toString() == id);
+    return product.title;
+  }
 }

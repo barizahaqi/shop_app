@@ -59,12 +59,14 @@ class CartDataSource extends ApiClient {
     }
   }
 
-  Future<Either<ErrorResponse, CartResponse>> getCartByUserId(
+  Future<Either<ErrorResponse, List<CartResponse>>> getCartByUserId(
       IdModel request) async {
     try {
       var url = "${StringConstant.userCartUrl}/${request.id}";
       Response response = await getMethod(url);
-      return Right(CartResponse.fromJson(response.body));
+      return Right((response.body as List)
+          .map((e) => CartResponse.fromJson(e))
+          .toList());
     } on ServerException catch (e) {
       return Left(ErrorResponse(message: e.message));
     }

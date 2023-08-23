@@ -21,7 +21,7 @@ class CartAddView extends StatelessWidget {
               const SizedBox(height: 20),
               CustomPrimaryButton(
                 onPressed: () {
-                  Get.find<CartChangeController>().addCart("1");
+                  Get.find<CartChangeController>().addCart();
                 },
                 text: "Add Cart",
               ),
