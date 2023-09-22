@@ -1,3 +1,3 @@
 # shop_app
  
-Shop app with fake API and flutter framework
+Shop app with fake store API and flutter framework
